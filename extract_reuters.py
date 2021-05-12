@@ -182,7 +182,7 @@ def main():
     year_list = [2017, 2016, 2015, 2014]
 	
 	# We used 20 cores of the server with Multiprocessing library    
-	nb_process = 20
+    nb_process = 20
 
     
     for year in year_list:
