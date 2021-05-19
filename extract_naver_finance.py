@@ -180,20 +180,20 @@ def get_article(article_url):
     article_url = urlopen(article_url)
     bs = BeautifulSoup(article_url.read(), "html.parser")
 
+    article_date = bs.find("span", class_="article_date")
+    print(article_date.get_text())
+
     article_title = bs.find("div", class_="article_info")
     article_title = article_title.find_next()
     article_title = article_title.get_text().strip()
     print(article_title)
 
-    article_date = bs.find("span", class_="article_date")
-    print(article_date.get_text())
-
     article_content = bs.find("div", class_="articleCont")
-    print(article_content.get_text())
+    #print(article_content.get_text())
 
 def main():
     # date > page > article_list > crawling_page
-    page_url = urlopen(get_url("20210519"))
+    page_url = urlopen(get_url("20190519"))
     bs = BeautifulSoup(page_url.read(), "html.parser")
     bs_newsList = bs.find("ul", class_="newsList")
     l = [x.get('href') for x in bs_newsList.find_all("a")]
@@ -204,12 +204,6 @@ def main():
 
     for x in l:
         get_article("https://finance.naver.com/" + x)
-
-
-
-
-
-    #get_article(article_url)
 
 
 """"
