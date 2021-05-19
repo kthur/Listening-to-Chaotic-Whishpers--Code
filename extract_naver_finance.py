@@ -168,21 +168,50 @@ def extraction_reuters(folder,year,nb_days, days_list):
     return('Total articles scrapped : {}'.format(total))
 
 
-def main():
-    # date > page > article_list > crawling_page
+def get_url(date, page=1):
     #url="https://finance.naver.com/news/news_list.nhn?mode=RANK&date=20210519&page=4"
     url = "https://finance.naver.com/news/news_list.nhn?mode=RANK&"
-    year=2020
-    month=5
-    day=18
-    date=datetime.date(year, month, day)
-    date = datetime.now()
-    page=1
-    url_date="date=" + date.strftime("%Y%m%d")
+    url_date="date=" + date
     url_page="page="+str(page)
     url = "https://finance.naver.com/news/news_list.nhn?mode=RANK&"+url_date+"&"+url_page
+    return url
 
-    print(url)
+def get_article(article_url):
+    article_url = urlopen(article_url)
+    bs = BeautifulSoup(article_url.read(), "html.parser")
+
+    article_title = bs.find("div", class_="article_info")
+    article_title = article_title.find_next()
+    article_title = article_title.get_text().strip()
+    print(article_title)
+
+    article_date = bs.find("span", class_="article_date")
+    print(article_date.get_text())
+
+    article_content = bs.find("div", class_="articleCont")
+    print(article_content.get_text())
+
+def main():
+    # date > page > article_list > crawling_page
+    page_url = urlopen(get_url("20210519"))
+    bs = BeautifulSoup(page_url.read(), "html.parser")
+    bs_newsList = bs.find("ul", class_="newsList")
+    l = [x.get('href') for x in bs_newsList.find_all("a")]
+
+    bs_newsList = bs.find("td", class_="pgRR")
+    last_page = bs_newsList.find("a").get("href").split("page=")[-1]
+    print(last_page)
+
+    for x in l:
+        get_article("https://finance.naver.com/" + x)
+
+
+
+
+
+    #get_article(article_url)
+
+
 """"
     folder = '/home/zeninvest/text_data/'
     failed_urls = folder + 'failed_urls'
