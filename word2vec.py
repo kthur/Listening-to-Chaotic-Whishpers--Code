@@ -1,5 +1,5 @@
 from keras.layers import Embedding, merge
-from keras.engine import Input
+#from keras.engine import Input
 from keras.models import Model
 from gensim.models import Word2Vec
 from gensim.utils import simple_preprocess
@@ -106,8 +106,8 @@ if __name__ == '__main__':
                  '/home/zeninvest/vocab']
 
     # variable arguments are passed to gensim's word2vec model
-    create_embeddings(data_path[0], data_path[1], data_path[2], size=300, min_count=5,
-                      window=10, sg=1, iter=15)
+    #create_embeddings(data_path[0], data_path[1], data_path[2], size=300, min_count=5, window=10, sg=1, iter=15)
+    create_embeddings(data_path[0], data_path[1], data_path[2], min_count=5, window=10, sg=1)
 
     word2idx, idx2word = load_vocab(data_path[2])
 

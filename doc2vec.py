@@ -47,8 +47,7 @@ class OurDoc2Vec(object):
                     i += 1
 
 		# tagging all the articles
-        self.tagged_data = [TaggedDocument(words=word_tokenize(str(_d.lower())), tags=[str(tag[i])]) for i, _d in
-                            enumerate(data)]
+        self.tagged_data = [TaggedDocument(words=word_tokenize(str(_d.lower())), tags=[str(tag[i])]) for i, _d in enumerate(data)]
 
         # Freeing memory
 
@@ -72,8 +71,7 @@ class OurDoc2Vec(object):
         for epoch in range(max_epochs):
             print('iteration {0}'.format(epoch))
             model.train(self.tagged_data,
-                        total_examples=model.corpus_count,
-                        epochs=model.iter)
+                        total_examples=model.corpus_count, epochs=model.epochs)
             # decrease learning rate
             model.alpha -= 0.0002
             # and reinitialize it
@@ -138,6 +136,8 @@ class OurDoc2Vec(object):
 
 if __name__ == '__main__':
     model = OurDoc2Vec("text_data", "d2v.model")
+    model.prepare_data()
+    model.train_doc2vec()
     model.test_doc2vec()
     model.readFile()
 
