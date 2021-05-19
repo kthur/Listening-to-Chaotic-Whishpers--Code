@@ -1,5 +1,5 @@
 import pickle
-article_firm_folder='/home/zeninvest/firm_csv_folder/'
+article_firm_folder='firm_csv_folder/'
 article_firm_pickle= article_firm_folder+'pickle/'
 import csv
 import os

@@ -138,6 +138,6 @@ class OurDoc2Vec(object):
 
 if __name__ == '__main__':
     model = OurDoc2Vec("text_data", "d2v.model")
-    #model.test_doc2vec()
+    model.test_doc2vec()
     model.readFile()
 

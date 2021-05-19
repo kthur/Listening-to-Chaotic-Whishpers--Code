@@ -188,11 +188,12 @@ def main():
     for year in year_list:
         year_str = str(year)
         journal = 'reuters/'
-        html_year = urlopen("http://www.reuters.com/resources/archive/us/" + year_str + ".html") # Insert your URL to extract
+        html_year = urlopen("https://www.reuters.com/news/archive/us/" + year_str + ".html") # Insert your URL to extract
+        # http://www.reuters.com/resources/archive/us/
         # BS object to parse the html code
 
         bs1 = BeautifulSoup(html_year.read())
-        year_pattern = '/resources/archive/us/' + year_str
+        year_pattern = '/news/archive/us/' + year_str
         title = "http://www.reuters.com"
         article_pattern = 'http://www.reuters.com/article'
 

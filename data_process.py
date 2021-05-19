@@ -14,6 +14,9 @@ def create_csv_firm(spnas):
     :return:
     """
 
+    dirname = 'text_data/'
+    firm_csv_folder = 'firm_csv_folder/'
+    lis = [' HP ', 'KeyCorp', ' Gap ', 'CF Industries']
     for x in spnas:
         firm_name = str(x[1])
         if firm_name in lis:
@@ -31,7 +34,7 @@ def create_csv_firm(spnas):
   
                         else :
                             f_path=os.path.join(day_path,fname)
-                            file = open(f_path, 'r')
+                            file = open(f_path, 'r', encoding='UTF8')
                             found=False
                             for line in file:
                                 if firm_name in line or firm_name.upper() in line:
@@ -104,11 +107,11 @@ def rename_file(dirname):
 if __name__ == '__main__':
 
     # Loading of files
-    spnas = '/home/zeninvest/SP500_nasdaq100.csv'
+    spnas = 'SP500_nasdaq100.csv'
     spnas_df = pd.read_csv(spnas)
     spnas_list = spnas_df[['Symbol', 'Name1']].values.tolist()
-    dirname = '/home/zeninvest/text_data/'
-    firm_csv_folder = '/home/zeninvest/firm_csv_folder/'
+    dirname = 'text_data/'
+    firm_csv_folder = 'firm_csv_folder/'
     lis = [' HP ', 'KeyCorp', ' Gap ', 'CF Industries']
 
     # Parallelization of the task
